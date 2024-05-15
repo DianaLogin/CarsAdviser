@@ -472,77 +472,11 @@ namespace CarsAdviser.Forms
                         }
                     }
 
-                    for (int i = 0; i < cars.Count; i++)
+                    foreach (var car in cars)
                     {
-                        var car = cars[i];
-                        Guna2Panel carPanel = this.Controls.Find($"carPanel{i + 1}", true).FirstOrDefault() as Guna2Panel;
-                        if (carPanel != null)
-                        {
-                            carPanel.Visible = true;
-
-                            Guna2PictureBox carPicture = carPanel.Controls.Find($"carPictureBox{i + 1}", true).FirstOrDefault() as Guna2PictureBox;
-                            if (carPicture != null)
-                            {
-                                if (car.Photo_1 != null)
-                                {
-                                    carPicture.Image = Image.FromFile(car.Photo_1);
-                                }
-                                else
-                                {
-                                    carPicture.Image = Properties.Resources.noAuto;
-                                }
-                            }
-
-                            Guna2PictureBox carBrandPicture = carPanel.Controls.Find($"carBrandPictureBox{i + 1}", true).FirstOrDefault() as Guna2PictureBox;
-                            if (carBrandPicture != null)
-                            {
-                                carBrandPicture.Image = Image.FromFile(helper.GetStampImageLocation(car.Cars_Stamp.Stamp));
-                            }
-
-                            Label carName = carPanel.Controls.Find($"carNameLabel{i + 1}", true).FirstOrDefault() as Label;
-                            if (carName != null)
-                            {
-                                carName.Text = $"{car.Cars_Stamp.Stamp} {car.Cars_Model.Model}";
-                            }
-
-                            Label carYear = carPanel.Controls.Find($"carYearLabel{i + 1}", true).FirstOrDefault() as Label;
-                            if (carYear != null)
-                            {
-                                carYear.Text = $"{car.Year}";
-                            }
-
-                            Label carMileage = carPanel.Controls.Find($"mileageInfoLabel{i + 1}", true).FirstOrDefault() as Label;
-                            if (carMileage != null)
-                            {
-                                carMileage.Text = $"{car.Mileage} км";
-                            }
-
-                            Label carFuel = carPanel.Controls.Find($"carFuelInfoLabel{i + 1}", true).FirstOrDefault() as Label;
-                            if (carFuel != null)
-                            {
-                                carFuel.Text = $"{car.Cars_Fuel.Fuel}";
-                            }
-
-                            Label carEngine = carPanel.Controls.Find($"carEngineInfoLabel{i + 1}", true).FirstOrDefault() as Label;
-                            if (carEngine != null)
-                            {
-                                carEngine.Text = $"{car.Cars_Engine.Engine}";
-                            }
-
-                            Label carDrive = carPanel.Controls.Find($"carDriveInfoLabel{i + 1}", true).FirstOrDefault() as Label;
-                            if (carDrive != null)
-                            {
-                                carDrive.Text = $"{car.Cars_Drive.Drive}";
-                            }
-
-                            Label carPrice = carPanel.Controls.Find($"carPriceInfoLabel{i + 1}", true).FirstOrDefault() as Label;
-                            if (carPrice != null)
-                            {
-                                carPrice.Text = $"{car.Price.ToString("#,#", culture)} ₽";
-                            }
-                        }
+                        CarsPanel.Controls.Clear();
+                        LoadCurrentCar(car);
                     }
-
                     for (int i = cars.Count; i < 9; i++)
                     {
                         Panel carPanel = this.Controls.Find($"carPanel{i + 1}", true).FirstOrDefault() as Panel;
